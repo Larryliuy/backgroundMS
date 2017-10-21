@@ -6,4 +6,4 @@
 适用于学习react上手项目
 
 部分图片
-![](./screenshots/userList)
+![](https://github.com/Larryliuy/backgroundMS/blob/master/screenshots/userList.png)
