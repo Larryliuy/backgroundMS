@@ -1,9 +1,7 @@
 # backgroundMS
-后台管理系统demo
+公司的一个后台管理系统项目
+node环境可npm install后直接运行
 
-
-
-适用于学习react上手项目
 
 部分项目图片
 
