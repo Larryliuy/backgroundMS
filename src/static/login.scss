@@ -1,0 +1,90 @@
+#main{
+    height: 100%;
+}
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding-top: calc(100px + 15%);
+}
+.login-form-forgot {
+    float: right;
+}
+.login-form-button {
+    width: 100%;
+}
+
+//home
+.header{
+    background: #45b4e7;
+    padding: 0;
+    //text-align:center;
+    height:118px;
+    line-height:118px;
+    color: #fff;
+    .userInfo{
+        position:absolute;
+        fontSize:16;
+        right:80px;
+        top:3px;
+    }
+    h1{
+        padding-left: 26px;
+        color: #fff;
+    }
+}
+.menu-box{
+    background-color: #f6f6f6;
+    ul{
+        background-color: #f6f6f6 !important;
+    }
+}
+
+.content-box{
+    padding: 24px 40px 0;
+    background-color:#fff;
+    .breadcrumb-left{
+        margin: 12px 0;
+        padding-left: 5px;
+        border-left: 3px solid #45b4e7;
+    }
+}
+
+.logo {
+    height: 32px;
+    background: #45b4e7;
+    border-radius: 6px;
+    /*margin: 16px;*/
+    color: #eeeeee;
+    font-size: 15px;
+    line-height: 32px;
+    padding-left: 5px;
+    overflow: hidden;
+}
+
+.searchBox{
+    margin-top: 22px;
+    height: 28px;
+    overflow: hidden;
+    >span{
+        display: inline-block;
+        margin-right: 48px;
+        input{
+            width: 228px;
+        }
+    }
+
+}
+.operateBtn{
+    margin-top: 22px;
+    button{
+        margin-right: 12px;
+    }
+}
+.dataTable{
+    margin-top: 22px;
+    table {
+        thead>tr>th,tbody{
+            text-align: center;
+        }
+    }
+}
