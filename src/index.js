@@ -17,27 +17,16 @@ class App extends React.Component {
 render(){
     return (
         <BrowserRouter>
-            {/*<Route path='/'  component={LoginBox}/>*/}
             <div style={h4Style}>
-                <HomeLayout/>
-                    {/*<Route path='/home' component={HomeLayout}/>*/}
-                    {/*<Route path='/'  component={LoginBox}/>*/}
-                    {/*<Route path='/register' component={RegisterBox} />
-                    <Route path='/home' component={HomeLayout}/>*/}
-                {/*<LoginBox loginIn = {this.handleLogin.bind(this)}></LoginBox>
-                <HomeLayout loginOut = {this.handleLogin.bind(this)}></HomeLayout>*/}
+                <Route path='/home' component={HomeLayout}/>
+                <Route path='/login' component={LoginBox}/>
+                <Route path='/' exact  component={LoginBox}/>
             </div>
         </BrowserRouter>
     )
 }
 
 }
-
-/*class App extends React.Component{
-    render(){
-        return (<div>React</div>)
-    }
-}*/
 
 function mapStateToProps(state) {
     return {
@@ -60,3 +49,4 @@ ReactDom.render(
         <App1/>
     </Provider>,
     document.getElementById('main'));
+

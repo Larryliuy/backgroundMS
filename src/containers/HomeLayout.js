@@ -1,6 +1,6 @@
 import { Layout, Menu, Icon ,message, Button, Input, Breadcrumb, Row, Col } from 'antd';
-import React,{Component} from 'react';
-import {Link} from 'react-router-dom'
+import React,{ Component } from 'react';
+import { Link } from 'react-router-dom'
 const { Header, Content, Footer, Sider } = Layout;
 import ShowTime from '../components/ShowTime'
 import UserTableContainer from '../containers/UserTableContainer'
@@ -8,6 +8,7 @@ import UserAddContainer from '../containers/UserAddContainer'
 import RoleAddContainer from '../containers/RoleAddContainer'
 import RoleTableContainer from '../containers/RoleTableContainer'
 import OperateRecordContainer from '../containers/OperateRecordContainer'
+import RiverTableContainer from '../containers/RiverTableContainer'
 import store,{CONSTANT} from '../reducer/reducer';
 import '../static/login.scss'
 const {SubMenu} = Menu;
@@ -27,10 +28,14 @@ class HomeLayout extends React.Component {
     constructor(props){
         super(props)
     }
+    //左侧导航栏点击事件处理函数
     onClickHandle = (e) => {
+        //key用来控制导航栏菜单视图
         store.dispatch({type:CONSTANT.TASKKEY,val:{key:e.key}})
     };
     loginOut=()=>{
+        // location.replace("/login");
+        // location.hash("/login");
         message.success('退出成功！')
     };
     render() {
@@ -41,7 +46,9 @@ class HomeLayout extends React.Component {
             {key:'3',value:'添加用户'},
             {key:'4',value:'角色列表'},
             {key:'5',value:'添加角色'},
-            {key:'6',value:'操作记录'}
+            {key:'6',value:'操作记录'},
+            {key:'7',value:'河道列表'},
+            {key:'8',value:'添加河道'}
         ];
         return (
             <Layout style={layoutStyle}>
@@ -65,7 +72,11 @@ class HomeLayout extends React.Component {
                                 <Menu.Item key="4">{breadcrumbsMap[3].value}</Menu.Item>
                                 <Menu.Item key="5">{breadcrumbsMap[4].value}</Menu.Item>
                             </SubMenu>
-                        <Menu.Item key="6">{breadcrumbsMap[5].value}</Menu.Item>
+                            <Menu.Item key="6">{breadcrumbsMap[5].value}</Menu.Item>
+                            <SubMenu key="river" title={<span>河道管理</span>}>
+                                <Menu.Item key="7">{breadcrumbsMap[6].value}</Menu.Item>
+                                <Menu.Item key="8">{breadcrumbsMap[7].value}</Menu.Item>
+                            </SubMenu>
                         </Menu>
                     </Sider>
                     <Content className="content-box">
@@ -78,6 +89,7 @@ class HomeLayout extends React.Component {
                         {state.homeState.key === '3' && <UserAddContainer></UserAddContainer>}
                         {state.homeState.key === '5' && <RoleAddContainer></RoleAddContainer>}
                         {state.homeState.key === '6' && <OperateRecordContainer></OperateRecordContainer>}
+                        {state.homeState.key === '7' && <RiverTableContainer></RiverTableContainer>}
                     </Content>
                 </Layout>
                 <Footer style={{ textAlign: 'center' }}>CopyRight©2017,AllRight Reverse</Footer>

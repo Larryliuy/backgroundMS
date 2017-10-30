@@ -13,7 +13,8 @@ class LoginBox extends React.Component {
         login:false
     }
     handleLogin(bool){
-        this.setState({login:bool});
+        // this.setState({login:bool});
+        this.props.history.push('/home')
     }
     render(){
         if(this.state.login){

@@ -11,13 +11,16 @@ module.exports = {
         filename: "[name].js"
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
+        /*new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
             }
+        }),*/
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE.ENV': "production"
         }),
-        new ExtractTextPlugin("style.css"),
+        new ExtractTextPlugin({filename:"style.css",disable: false,allChunks: true}),
         new webpack.optimize.CommonsChunkPlugin({name:'vendors',fileName:'vendors.js'} ),
         new webpack.optimize.UglifyJsPlugin({
             output: {
@@ -29,19 +32,19 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: 'babel-loader',
-                query: {
+                loader: 'babel-loader',
+                options: {
                     presets: [ 'react','es2015','stage-0'],
                     plugins: ["transform-class-properties",["import", { libraryName: "antd", style: true}]]
                 }
             },
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
+                // exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use:[
@@ -56,12 +59,18 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract('css-loader!sass-loader')
+                // exclude: /node_modules/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use:['css-loader','sass-loader']
+                })
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract('css-loader!less-loader')
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use:['css-loader','less-loader']
+                })
             }
         ]
     },

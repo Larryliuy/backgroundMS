@@ -1,12 +1,14 @@
 import React,{Component} from 'react'
 import { Button, Input, message } from 'antd';
-import UserDataTable from '../components/UserDataTable';
+import UserDataTable from '../components/ShowDataTable';
 import '../static/login.scss'
 const divStyle = {
     textAlign:'center !important'
 };
 
 let account = '',name='',date='';
+let now = new Date().toLocaleString();
+console.log(now)
 class OperateRecordContainer extends React.Component {
     constructor(props){
         super(props)
@@ -63,7 +65,7 @@ class OperateRecordContainer extends React.Component {
             key: '1',
             id:'1001',
             name: 'John Brown',
-            account: '2017-10-21 16:04',
+            account: now,
             group: '添加用户',
             status: '未锁定',
         }, {
@@ -91,7 +93,7 @@ class OperateRecordContainer extends React.Component {
             key: '5',
             id:'1005',
             name: 'John Brown',
-            account: '2017-10-21 16:04',
+            account: now,
             group: '添加用户',
             status: '未锁定',
         }, {

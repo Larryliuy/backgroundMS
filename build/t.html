@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="amount" placeholder="请输入随机数的个数">
+<button id="qBtn">查询</button>
+<p id="result" style="width: 50%;word-break:break-all">结果</p>
+</body>
+<script>
+    let inputDom = document.getElementById('amount');
+    let resultDom = document.getElementById('result');
+    let qBtn = document.getElementById('qBtn');
+    let arrResult = [],objResult={};
+    qBtn.addEventListener('click',function () {
+        //随机数
+        function sortAndD() {
+            let arr = [],obj={};
+            for(let i = 0; i < Number(inputDom.value); i++){
+                let numb = Math.ceil(Math.random()*1000).toString();
+                if(!obj[numb]){
+                    obj[numb]=1;
+                    arr.push(numb)
+                }
+            }
+            arr.sort()
+            let arrLength = arr.length;
+            if(!objResult[arrLength]){
+                objResult[arrLength]=1;
+                arrResult.push(arrLength)
+            }
+        }
+        let i = 0;
+        while(i<1000){
+            sortAndD();
+            i++
+        }
+        arrResult.sort()
+        resultDom.innerHTML = arrResult.toString()
+    })
+
+
+</script>
+</html>

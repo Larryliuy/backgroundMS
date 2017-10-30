@@ -1,7 +1,9 @@
 import React,{Component} from 'react'
-import { Button, Input, message } from 'antd';
-import UserDataTable from '../components/UserDataTable';
+import { Button, Input, message, Popconfirm } from 'antd';
+import ShowDataTable from '../components/ShowDataTable';
 import '../static/login.scss'
+import axios from 'axios'
+import dataOne from '../mock/mock'
 const divStyle = {
     textAlign:'center !important'
 };
@@ -10,8 +12,31 @@ let account = '',name='',date='';
 class UserTableContainer extends React.Component {
     constructor(props){
         super(props)
+        this.state={
+            editable:false
+        }
     }
     componentDidMount(){
+        axios.get('http://wthrcdn.etouch.cn/weather_mini?citykey=101280601')
+            .then(function (response) {
+                /*console.log(response);
+                console.log(response.data);
+                console.log(response.data.data);*/
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        const first = 'first';
+        const last = 'last';
+        const host = 'localhost';
+        const port = '3006';
+        const database = 'login';
+        const welcome = `You have logged in as ${first} ${last}`;
+        const login = `http://${host}:${port}/${database}`;
+        // console.log(welcome)
+        // console.log(login)
+        console.log(dataOne)
+        // location.href = login;
     }
     onChangeAccount(e){
         account = e.target.value;
@@ -23,27 +48,40 @@ class UserTableContainer extends React.Component {
         date = e.target.value;
     }
     handleClickSearch(){
-        console.log(account+' ,'+name+','+date)
+        // console.log(account+' ,'+name+','+date)
         message.error(account+' ,'+name+' ,'+date)
+    }
+    changeEditable(editable){
+        this.setState({editable:editable})
     }
     handleClickBtn(e){
         switch (e.target.value){
             case '1':
                 console.log('下载模板')
+                message.error('error')
                 break;
             case '2':
                 console.log('下载数据')
+                message.error('error')
                 break;
             case '3':
                 console.log('上传')
+                message.error('error')
                 break;
             case '4':
                 console.log('添加用户')
+                message.error('error')
                 break;
             default:
                 console.log('别瞎鸡巴乱点')
         }
 
+    }
+    edit() {
+        this.setState({ editable:true });
+    }
+    editDone(){
+        this.setState({ editable:false });
     }
     render(){
         let columns = [{
@@ -61,7 +99,22 @@ class UserTableContainer extends React.Component {
         }, {
             title: '状态',
             dataIndex: 'status',
-        }];
+        },{title: '操作',
+            dataIndex: 'operation',
+            render: () => {
+            const { editable } = this.state ;
+            return (<div>
+            {editable ?
+                <span>
+                      <a onClick={() => this.editDone()}>保存 </a>
+                      <Popconfirm title="确定取消吗?" onConfirm={() => this.editDone()}>
+                        <a> 取消</a>
+                      </Popconfirm>
+                    </span>
+                :
+                <span><a onClick={() => this.edit()}>编辑</a> | <a>详情</a> | <a>锁定</a> | <a>删除</a></span>
+            }
+        </div>)}}];
         let data = [{
             key: '1',
             id:'1001',
@@ -108,9 +161,10 @@ class UserTableContainer extends React.Component {
         function getData(){
             let datas=[];
             for (let i = 0; i < 10; i++){
-                console.log(data)
+                // console.log(data)
                 datas = datas.concat(data)
             }
+            // console.log(datas)
             return datas;
         }
         return(
@@ -128,7 +182,7 @@ class UserTableContainer extends React.Component {
                     <Button type="primary" value='4'>添加用户</Button>
                 </div>
                 <div className='dataTable'>
-                    <UserDataTable data={getData()} columns={columns}></UserDataTable>
+                    <ShowDataTable data={getData()} columns={columns} operateType='user'></ShowDataTable>
                 </div>
             </div>
         )}

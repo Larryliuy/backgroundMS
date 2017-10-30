@@ -39,7 +39,7 @@ function getDateString(){
     return year+'年'+month+'月'+day+'日'+' '+ weekString;
 }
 dateString = getDateString();
-console.log(dateString)
+// console.log(dateString)
 const ShowTime=()=>(<span>{dateString}</span>)
 
 export default ShowTime;
